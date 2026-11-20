@@ -27,6 +27,7 @@ const fetchPopularMovie = async ({ query }: { query: string }) => {
 
 export { TMDB_CONFIG, fetchPopularMovie };
 
+// test abc
 // const url = 'https://api.themoviedb.org/3/authentication';
 // const options = {
 //   method: 'GET',

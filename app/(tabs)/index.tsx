@@ -1,8 +1,12 @@
 import { useRouter } from "expo-router";
-import { Image, ScrollView, View } from "react-native";
+import { ActivityIndicator, Image, ScrollView, Text, View, FlatList } from "react-native";
 import SearchBar from "../../components/SearchBar";
 import { icons } from "../../constants/icons";
 import { images } from "../../constants/images";
+import { fetchMovies } from "../../services/api";
+import useFetch from "../../services/useFetch";
+import MovieCard from "../../components/movieCard";
+
 
 export default function Index() {
   const router = useRouter();
@@ -23,11 +27,40 @@ export default function Index() {
       >
         <Image source={icons.logo} className="w-12 h-10 mt-20 mb-5 mx-auto" />
 
+          {moviesLoading ? (
+              <ActivityIndicator size="large" color="#0000ff" className="mt-10 self-center" />
+          ) : moviesError ? (
+              <Text>Error: {moviesError.message}</Text>
+          ) : (
+            <>
+              <SearchBar
+                  onPress={() => router.push("/search")}
+                  placeholder="Search a Movie"
+              />
+
+                <>
+                    <Text className="text-xl font-bold text-white">Latest Movies</Text>
+
+                    <FlatList
+                        data={movies}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => (
+                            <MovieCard {...item} />
+                        )}
+                        numColumns={3}
+                        columnWrapperStyle={{
+                            justifyContent: "flex-start",
+                            gap: 3,
+                            marginBottom: 10,
+                        }}
+                        className="mt-5 pb-32"
+                        scrollEnabled={false}
+                    />
+                </>
+            </>
+          )}
         <View className="flex-1 mt-5">
-          <SearchBar
-            onPress={() => router.push("/search")}
-            placeholder="Search a Movie"
-          />
+
         </View>
       </ScrollView>
     </View>

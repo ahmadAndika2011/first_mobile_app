@@ -7,10 +7,10 @@ const TMDB_CONFIG = {
   },
 };
 
-const fetchPopularMovie = async ({ query }: { query: string }) => {
+const fetchMovies = async ({ query }: { query: string }) => {
   const endpoint = query
-    ? `${TMDB_CONFIG.BASE_URL}/search/movie?sort_by=${query}`
-    : `${TMDB_CONFIG.BASE_URL}/discover/movie/sort_by=popularity.desc`;
+    ? `${TMDB_CONFIG.BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
+    : `${TMDB_CONFIG.BASE_URL}/discover/movie?sort_by=popularity.desc`;
 
   const response = await fetch(endpoint, {
     method: "GET",
@@ -25,7 +25,7 @@ const fetchPopularMovie = async ({ query }: { query: string }) => {
   return data.results;
 };
 
-export { TMDB_CONFIG, fetchPopularMovie };
+export { TMDB_CONFIG, fetchMovies };
 
 // const url = 'https://api.themoviedb.org/3/authentication';
 // const options = {

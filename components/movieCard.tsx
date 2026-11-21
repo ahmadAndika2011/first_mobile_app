@@ -4,7 +4,7 @@ import { icons } from "../constants/icons";
 
 export default function MovieCard({id, poster_path, title, vote_average, release_date}: Movie) {
     return (
-        <View className="w-[30%]">
+        <View className="w-1/3">
             <Link href={`/movies/${id}`} asChild>
                 <TouchableOpacity className="w-full">
                     <Image

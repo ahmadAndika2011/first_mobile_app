@@ -50,7 +50,7 @@ export default function Index() {
                         numColumns={3}
                         columnWrapperStyle={{
                             justifyContent: "flex-start",
-                            gap: 3,
+                            gap: 5,
                             marginBottom: 10,
                         }}
                         className="mt-5 pb-32"
